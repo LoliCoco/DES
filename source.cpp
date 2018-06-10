@@ -1,7 +1,5 @@
 #include<iostream>
-#include<stdio.h>
 #include"des.h"
-#define _CRT_SECURE_NO_WARNING
 
 Data s_box[8][4][16] =
 {
@@ -120,7 +118,7 @@ void DES::function_f(Data *Left, Data *Right, Data round) {
 	for (int i = 0; i < 6; i++) {
 		expansion[i] ^= round_key[round][i];
 	}
-	//S_box Ä¡È¯
+	//S_box ì¹˜í™˜
 	Sbox(expansion,Permute_Sbox);
 	Permutation(Permute_P, Permute_Sbox, P, 32);
 		for (int i = 0; i < 4; i++) 
@@ -214,8 +212,8 @@ void DES::encryption(Data *Cipher) {
 	Data InitPermute[8] = { 0 };
 	Data cipher[8] = { 0 };
 	Data combine[8] = { 0 };
-	Permutation(InitPermute, states, IP, 64); // ÃÊ±â Ä¡È¯
-	Split(InitPermute, left, right); // ÃÊ±â Ä¡È¯ 32ºñÆ®¾¿ ÁÂ¿ì ºÐ¸®
+	Permutation(InitPermute, states, IP, 64); // ì´ˆê¸° ì¹˜í™˜
+	Split(InitPermute, left, right); // ì´ˆê¸° ì¹˜í™˜ 32ë¹„íŠ¸ì”© ì¢Œìš° ë¶„ë¦¬
 	for (int round = 0; round < 16; round++) {
 		CopyLR(right_temp, right);
 		function_f(left, right, round);
@@ -228,11 +226,11 @@ void DES::encryption(Data *Cipher) {
 	Print(Cipher, 8);
 }
 void DES::decryption(Data *PlainText,Data *Cipher) {
-	Data right_temp[4] = { 0 }; // Round¿¡¼­ ¿À¸¥ÂÊ ¿¬»êÀü ¿ÞÂÊ¿¡ ÀúÀå
+	Data right_temp[4] = { 0 }; // Roundì—ì„œ ì˜¤ë¥¸ìª½ ì—°ì‚°ì „ ì™¼ìª½ì— ì €ìž¥
 	Data InitPermute[8] = { 0 };
 	Data combine[8] = { 0 };
-	Permutation(InitPermute, Cipher, IP, 64); // ÃÊ±â Ä¡È¯
-	Split(InitPermute, left, right); // ÃÊ±â Ä¡È¯ 32ºñÆ®¾¿ ÁÂ¿ì ºÐ¸®
+	Permutation(InitPermute, Cipher, IP, 64); // ì´ˆê¸° ì¹˜í™˜
+	Split(InitPermute, left, right); // ì´ˆê¸° ì¹˜í™˜ 32ë¹„íŠ¸ì”© ì¢Œìš° ë¶„ë¦¬
 	for (int round = 15; round >=0; round--) {
 		CopyLR(right_temp, right);
 		function_f(left, right, round);
@@ -243,14 +241,7 @@ void DES::decryption(Data *PlainText,Data *Cipher) {
 }
 
 int main(int argc, char *argv[]) {
-	char from_a_txt[30];
-	FILE *file_pointer;
-	file_pointer = fopen("C:\\Users\\Admin\\\Desktop\\a.txt", "r");
-	fscanf(file_pointer, "%s" ,from_a_txt);
-	printf("ÀÐ¾î¿Â ºÎºÐ : %s \n", from_a_txt);
-
-	fclose(file_pointer);
-/*
+	
 	Data PlainText[8] = "asdsaad";
 	Data key[8] = {12,34,5,7,8,9,0,1 };
 	Data return_arr[8] = { 0 };
@@ -268,7 +259,6 @@ int main(int argc, char *argv[]) {
 		printf("%c ", return_arr[i]);
 	}
 
-	system("pause");
-	*/
+	
 	return 0;
 }
