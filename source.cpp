@@ -251,14 +251,6 @@ int main(int argc, char *argv[]) {
 	des.SubkeyGenerator(key);
 	des.encryption(Cipher);	
 	des.decryption(return_arr,Cipher);
-	for (int i = 0; i < 8; i++) {
-		printf("%c", Cipher[i],Cipher[i]);
-	}
-	cout << endl;
-	for (int i = 0; i < 8; i++) {
-		printf("%c ", return_arr[i]);
-	}
 
-	
 	return 0;
 }
