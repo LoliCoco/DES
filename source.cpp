@@ -1,4 +1,5 @@
 #include<iostream>
+
 #include"des.h"
 
 Data s_box[8][4][16] =
@@ -58,7 +59,7 @@ Data pow2(Data num, Data exp) {
 }
 void Print(Data *arr, int length) {
 	for (int i = 0; i < length; i++) {
-		printf("%d ", arr[i]);
+		printf("%c ", arr[i]);
 	}
 	printf("\n");
 }
@@ -241,8 +242,8 @@ void DES::decryption(Data *PlainText,Data *Cipher) {
 }
 
 int main(int argc, char *argv[]) {
-	
-	Data PlainText[8] = "asdsaad";
+	std::cout << argv[1] << std::endl;
+	Data PlainText[8] = "Korean";
 	Data key[8] = {12,34,5,7,8,9,0,1 };
 	Data return_arr[8] = { 0 };
 	DES des(PlainText, key);
@@ -251,6 +252,7 @@ int main(int argc, char *argv[]) {
 	des.SubkeyGenerator(key);
 	des.encryption(Cipher);	
 	des.decryption(return_arr,Cipher);
+	Print(PlainText, 8);
 
 	return 0;
 }
